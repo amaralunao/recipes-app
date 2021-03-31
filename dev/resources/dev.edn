@@ -1,3 +1,7 @@
-{:duct.database/sql
+;;{:duct.core/environment :development
+;; :duct.core/include ["recipes-app/config"]
+
+{
+ :duct.database/sql
  {:connection-uri "jdbc:sqlite:db/dev.sqlite"}
  }

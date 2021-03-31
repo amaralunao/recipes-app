@@ -2,10 +2,21 @@
  {:duct.core/project-ns recipes-app
 
   :duct.router/ataraxy
-  {:routes {[:get "/"] [:recipes-app.handler/index]}}
+  {:routes {[:get "/"] [:recipes-app.handler.index/index]
+            "/add-recipe"
+            {:get [:recipes-app.handler.recipe/show-create]
+             [:post {recipe-form :form-params}] [:recipes-app.handler.recipe/create recipe-form]}}}
 
-  :recipes-app.handler/index
-  {:db #ig/ref :duct.database/sql}}
+ :recipes-app.handler.index/index {}
+ :recipes-app.handler.recipe/show-create {}
+ :recipes-app.handler.recipe/create {:db #ig/ref :duct.database/sql}
+
+ :duct.migrator/ragtime
+ {:migrations [#ig/ref :recipes-app.migrations/create-recipe]}
+
+ [:duct.migrator.ragtime/sql :recipes-app.migrations/create-recipe]
+ {:up ["CREATE TABLE recipe (id INTEGER PRIMARY KEY, name TEXT UNIQUE, author TEXT, url TEXT, text TEXT, rating INTEGER)"]
+  :down ["DROP TABLE recipe"]}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
