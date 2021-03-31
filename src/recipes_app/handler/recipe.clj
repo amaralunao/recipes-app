@@ -19,3 +19,10 @@
                    {:messages ["Recipe added"]}
                    result)]
       [::response/ok (views.recipe/recipe-view recipe alerts)])))
+
+(defmethod ig/init-key :recipes-app.handler.recipe/list [_ {:keys [db]}]
+  (fn [_]
+    (let [recipes-list (boundary.recipe/list-recipes db)]
+      (if (seq recipes-list)
+        [::response/ok (views.recipe/list-recipes-view recipes-list {})]
+        [::response/ok (views.recipe/list-recipes-view [] {:messages ["No recipes found."]})]))))

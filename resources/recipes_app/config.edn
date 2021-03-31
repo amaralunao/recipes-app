@@ -5,10 +5,12 @@
   {:routes {[:get "/"] [:recipes-app.handler.index/index]
             "/add-recipe"
             {:get [:recipes-app.handler.recipe/show-create]
-             [:post {recipe-form :form-params}] [:recipes-app.handler.recipe/create recipe-form]}}}
+             [:post {recipe-form :form-params}] [:recipes-app.handler.recipe/create recipe-form]}
+            [:get "/list-recipes"] [:recipes-app.handler.recipe/list]}}
 
  :recipes-app.handler.index/index {}
  :recipes-app.handler.recipe/show-create {}
+ :recipes-app.handler.recipe/list {:db #ig/ref :duct.database/sql}
  :recipes-app.handler.recipe/create {:db #ig/ref :duct.database/sql}
 
  :duct.migrator/ragtime

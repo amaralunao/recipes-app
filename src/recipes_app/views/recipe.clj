@@ -70,3 +70,17 @@
        [:div.row.alert.alert-success
         [:div.col message]]))]))
 
+
+(defn list-recipes-view
+   [recipes {:keys [messages]}]
+   (page
+    [:div.container.jumbotron.bg-light
+     [:div.row [:h2 "Recipes"]]
+     (for [{:keys [name author url text rating]} (doall recipes)]
+       [:div
+        (recipe-attributes-view name author url text rating)
+        [:hr]])
+     (when messages
+       (for [message (doall messages)]
+         [:div.row.alert.alert-success
+          [:div.col message]]))]))
