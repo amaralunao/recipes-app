@@ -11,6 +11,7 @@
                  [org.xerial/sqlite-jdbc "3.34.0"]]
   :plugins [[duct/lein-duct "0.12.2"]]
   :main ^:skip-aot recipes-app.main
+  :uberjar-name "recipes-app.jar"
   :resource-paths ["resources" "target/resources"]
   :prep-tasks     ["javac" "compile" ["run" ":duct/compiler"]]
   :middleware     [lein-duct.plugin/middleware]
