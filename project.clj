@@ -8,7 +8,8 @@
                  [duct/module.logging "0.5.0"]
                  [duct/module.sql "0.6.1"]
                  [duct/module.web "0.7.2"]
-                 [org.xerial/sqlite-jdbc "3.34.0"]]
+                 [org.xerial/sqlite-jdbc "3.34.0"]
+                 [hiccup "1.0.5"]]
   :plugins [[duct/lein-duct "0.12.2"]]
   :main ^:skip-aot recipes-app.main
   :uberjar-name "recipes-app.jar"
