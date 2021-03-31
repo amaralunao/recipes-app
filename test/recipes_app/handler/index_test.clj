@@ -6,7 +6,7 @@
 
 (deftest check-index-handler
   (testing "Ensure that the index handler returns two links for add and list recipes"
-    (let [handler (ig/init-key :recipes-app.handler/index {})
+    (let [handler (ig/init-key :recipes-app.handler.index/index {})
           response (handler (mock/request :get "/"))]
       (is (= :ataraxy.response/ok (first response)))
       (is (= "href=\"/add-recipe\""
