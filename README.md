@@ -1,6 +1,6 @@
 # recipes-app
 
-FIXME: description
+[![CircleCI](https://circleci.com/gh/amaralunao/recipes-app.svg?style=svg)](https://circleci.com/gh/amaralunao/recipes-app)
 
 ## Developing
 
