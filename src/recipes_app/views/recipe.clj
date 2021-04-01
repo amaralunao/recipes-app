@@ -32,8 +32,11 @@
                (submit-button {:class "btn btn-primary text-center"} "Add")])]]))
 
 (defn- recipe-attributes-view
-  [name author url text rating]
+  [id name author url text rating]
   [:div
+   [:div.row
+    [:div.col-2 "RecipeId:"]
+    [:div.col-10 id]]
    [:div.row
     [:div.col-2 "Name:"]
     [:div.col-10 name]]
@@ -55,12 +58,12 @@
       [:div.col-10 rating]])])
 
 (defn recipe-view
-  [{:keys [name author url text rating]} {:keys [errors messages]}]
+  [{:keys [id name author url text rating]} {:keys [errors messages]}]
   (page
    [:div.container.jumbotron.bg-light
     [:div.row
      [:h2 "Recipe"]]
-    (recipe-attributes-view name author url text rating)
+    (recipe-attributes-view id name author url text rating)
     (when errors
       (for [error (doall errors)]
        [:div.row.alert.alert-danger
@@ -76,9 +79,9 @@
    (page
     [:div.container.jumbotron.bg-light
      [:div.row [:h2 "Recipes"]]
-     (for [{:keys [name author url text rating]} (doall recipes)]
+     (for [{:keys [id name author url text rating]} (doall recipes)]
        [:div
-        (recipe-attributes-view name author url text rating)
+        (recipe-attributes-view id name author url text rating)
         [:hr]])
      (when messages
        (for [message (doall messages)]

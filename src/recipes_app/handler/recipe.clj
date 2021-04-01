@@ -26,3 +26,10 @@
       (if (seq recipes-list)
         [::response/ok (views.recipe/list-recipes-view recipes-list {})]
         [::response/ok (views.recipe/list-recipes-view [] {:messages ["No recipes found."]})]))))
+
+(defmethod ig/init-key :recipes-app.handler.recipe/get [_ {:keys [db]}]
+   (fn [{[_ rid] :ataraxy/result :as request}]
+     (let [recipe (into {} (boundary.recipe/get-recipe db rid))]
+       (if (not-empty recipe)
+         [::response/ok (views.recipe/recipe-view recipe {})]
+         [::response/ok (views.recipe/recipe-view [] {:messages ["No recipe found."]})]))))

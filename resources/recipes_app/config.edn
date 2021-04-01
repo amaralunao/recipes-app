@@ -6,12 +6,15 @@
             "/add-recipe"
             {:get [:recipes-app.handler.recipe/show-create]
              [:post {recipe-form :form-params}] [:recipes-app.handler.recipe/create recipe-form]}
-            [:get "/list-recipes"] [:recipes-app.handler.recipe/list]}}
+            "/list-recipes"
+            {[:get] [:recipes-app.handler.recipe/list]
+             [:get "/" rid] [:recipes-app.handler.recipe/get rid]}}}
 
  :recipes-app.handler.index/index {}
  :recipes-app.handler.recipe/show-create {}
  :recipes-app.handler.recipe/list {:db #ig/ref :duct.database/sql}
  :recipes-app.handler.recipe/create {:db #ig/ref :duct.database/sql}
+ :recipes-app.handler.recipe/get {:db #ig/ref :duct.database/sql}
 
  :duct.migrator/ragtime
  {:migrations [#ig/ref :recipes-app.migrations/create-recipe]}
