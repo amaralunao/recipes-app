@@ -1,5 +1,7 @@
 # recipes-app
 
+Very simple api following a turorial and adding some endpoints in order to practice clojure and duct-framework
+
 [![CircleCI](https://circleci.com/gh/amaralunao/recipes-app.svg?style=svg)](https://circleci.com/gh/amaralunao/recipes-app)
 
 ## Developing
@@ -48,6 +50,117 @@ dev=> (reset)
 :reloading (...)
 :resumed
 ```
+### Calling Endpoints
+
+#### Add a recipe
+- URL
+http://localhost:3000/add-recipe
+
+- Method:
+ GET 
+
+- URL Params
+
+None
+
+- Data Params
+
+Not required:
+
+name: unique constraint, type string 
+
+author, url, text: type string
+
+rating: type int
+
+Success:
+Response: 200 OK
+
+"Recipe
+Name: Example
+Author: Example
+Url: www.example.com
+Text: Recipe text
+Rating: 9
+Recipe added"
+
+Failure:
+Response 200 OK
+
+"Recipe not added due to [SQLITE_CONSTRAINT_UNIQUE] A UNIQUE constraint failed (UNIQUE constraint failed: recipe.name)"
+
+#### List all recipes
+- URL
+http://localhost:3000/recipes
+
+- Method:
+ GET 
+
+- URL Params
+
+None
+
+- Data Params
+
+None
+
+Success:
+Response: 200 OK
+Return a list of all recipes in database 
+
+Empty response:
+Response: 200 OK
+"No recipes found"
+
+#### Get one recipe instance
+
+- URL
+http://localhost:3000/recipes/1
+
+- Method:
+ GET 
+
+- URL Params
+ recipe id: type int
+
+
+- Data Params
+
+None
+
+Success:
+Response: 200 OK
+
+Returns a recipe instance
+
+Not found:
+Response: 200 OK
+"Recipe not found"
+
+
+#### Delete one recipe instance
+
+- URL
+http://localhost:3000/recipes/1
+
+- Method:
+ DELETE 
+
+- URL Params
+ recipe id: type int
+
+
+- Data Params
+
+None
+
+Success:
+Response: 200 OK
+"Recipe deleted"
+
+Not found:
+Response: 200 OK
+"Recipe not found"
 
 ### Testing
 
@@ -67,4 +180,4 @@ lein test
 
 ## Legal
 
-Copyright © 2021 FIXME
+Copyright © 2021 Maria Vatasoiu 
