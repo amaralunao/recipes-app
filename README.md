@@ -57,86 +57,89 @@ dev=> (reset)
 http://localhost:3000/add-recipe
 
 - Method:
- GET 
+  GET 
 
 - URL Params
 
-None
+  None
 
 - Data Params
 
-Not required:
+  ```
+  name: not required, type string, unique constraint,
+  author: not required, type string
+  url: not required, type string
+  text: not required, type string
+  rating: not required, type int 
+  ```
+- Success:
+  Response: 200 OK
+  ```
+  "Recipe
+  Name: Example
+  Author: Example
+  Url: www.example.com
+  Text: Recipe text
+  Rating: 9
+  Recipe added"
+  ```
+- Failure:
+  Response 200 OK
 
-name: unique constraint, type string 
-
-author, url, text: type string
-
-rating: type int
-
-Success:
-Response: 200 OK
-
-"Recipe
-Name: Example
-Author: Example
-Url: www.example.com
-Text: Recipe text
-Rating: 9
-Recipe added"
-
-Failure:
-Response 200 OK
-
-"Recipe not added due to [SQLITE_CONSTRAINT_UNIQUE] A UNIQUE constraint failed (UNIQUE constraint failed: recipe.name)"
+  ```
+  "Recipe not added due to [SQLITE_CONSTRAINT_UNIQUE] A UNIQUE constraint failed (UNIQUE constraint failed: recipe.name)"
+  ```
 
 #### List all recipes
 - URL
 http://localhost:3000/recipes
 
 - Method:
- GET 
+  GET 
 
 - URL Params
 
-None
+  None
 
 - Data Params
 
-None
+  None
 
-Success:
-Response: 200 OK
-Return a list of all recipes in database 
+- Success:
+  Response: 200 OK
+  Returns a list of all recipes in database 
 
-Empty response:
-Response: 200 OK
-"No recipes found"
-
+- Empty response:
+  Response: 200 OK
+  ```
+  "No recipes found"
+  ```
 #### Get one recipe instance
 
 - URL
 http://localhost:3000/recipes/1
 
 - Method:
- GET 
+  GET 
 
 - URL Params
- recipe id: type int
-
+  ``` 
+  recipe id: type int
+  ```
 
 - Data Params
 
-None
+  None
 
-Success:
-Response: 200 OK
+- Success:
+  Response: 200 OK
+  Returns a recipe instance
 
-Returns a recipe instance
-
-Not found:
-Response: 200 OK
-"Recipe not found"
-
+- Not found:
+  Response: 200 OK
+  ```
+  "Recipe not found"
+  ```
 
 #### Delete one recipe instance
 
@@ -144,23 +147,27 @@ Response: 200 OK
 http://localhost:3000/recipes/1
 
 - Method:
- DELETE 
+  DELETE 
 
 - URL Params
- recipe id: type int
-
+  ```
+  recipe id: type int
+  ```
 
 - Data Params
 
-None
+  None
 
-Success:
-Response: 200 OK
-"Recipe deleted"
-
-Not found:
-Response: 200 OK
-"Recipe not found"
+- Success:
+  Response: 200 OK
+  ```
+  "Recipe deleted"
+  ```
+- Not found:
+  Response: 200 OK
+  ```
+  "Recipe not found"
+  ```
 
 ### Testing
 
