@@ -33,3 +33,14 @@
        (if (not-empty recipe)
          [::response/ok (views.recipe/recipe-view recipe {})]
          [::response/ok (views.recipe/recipe-view [] {:messages ["No recipe found."]})]))))
+
+
+(defmethod ig/init-key :recipes-app.handler.recipe/delete [_ {:keys [db]}]
+  (fn [{[_ rid] :ataraxy/result :as request}]
+    (let [result (boundary.recipe/get-recipe db rid)
+          alerts (if (not-empty result)
+                   (do (boundary.recipe/delete-recipe db rid)
+                       {:messages ["Recipe deleted"]})
+                   {:messages ["No recipe found"]})]
+      [::response/ok (views.recipe/recipe-view {} alerts)])))
+

@@ -34,12 +34,14 @@
 (defn- recipe-attributes-view
   [id name author url text rating]
   [:div
-   [:div.row
-    [:div.col-2 "RecipeId:"]
-    [:div.col-10 id]]
-   [:div.row
-    [:div.col-2 "Name:"]
-    [:div.col-10 name]]
+   (when id
+     [:div.row
+      [:div.col-2 "Id:"]
+      [:div.col-10 id]])
+   (when name
+     [:div.row
+      [:div.col-2 "Name:"]
+      [:div.col-10 name]])
    (when author
      [:div.row
       [:div.col-2 "Author:"]

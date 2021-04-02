@@ -9,4 +9,4 @@
       [:a.btn.btn-primary {:href "/add-recipe"} "Add a Recipe"]]]
     [:row
      [:p
-      [:a.btn.btn-primary {:href "/list-recipes"} "List Recipes"]]]]))
+      [:a.btn.btn-primary {:href "/recipes"} "List Recipes"]]]]))

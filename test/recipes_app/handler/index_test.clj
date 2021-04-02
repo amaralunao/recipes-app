@@ -11,5 +11,5 @@
       (is (= :ataraxy.response/ok (first response)))
       (is (= "href=\"/add-recipe\""
              (re-find #"href=\"/add-recipe\"" (second response))))
-      (is (= "href=\"/list-recipes\""
-             (re-find #"href=\"/list-recipes\"" (second response)))))))
+      (is (= "href=\"/recipes\""
+             (re-find #"href=\"/recipes\"" (second response)))))))

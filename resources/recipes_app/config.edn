@@ -6,22 +6,27 @@
             "/add-recipe"
             {:get [:recipes-app.handler.recipe/show-create]
              [:post {recipe-form :form-params}] [:recipes-app.handler.recipe/create recipe-form]}
-            "/list-recipes"
+            "/recipes"
             {[:get] [:recipes-app.handler.recipe/list]
-             [:get "/" rid] [:recipes-app.handler.recipe/get rid]}}}
+             [:get "/" rid] [:recipes-app.handler.recipe/get ^int rid]
+             [:delete "/" rid] [:recipes-app.handler.recipe/delete ^int rid]}}}
 
  :recipes-app.handler.index/index {}
  :recipes-app.handler.recipe/show-create {}
  :recipes-app.handler.recipe/list {:db #ig/ref :duct.database/sql}
  :recipes-app.handler.recipe/create {:db #ig/ref :duct.database/sql}
  :recipes-app.handler.recipe/get {:db #ig/ref :duct.database/sql}
+ :recipes-app.handler.recipe/delete {:db #ig/ref :duct.database/sql}
 
  :duct.migrator/ragtime
  {:migrations [#ig/ref :recipes-app.migrations/create-recipe]}
 
  [:duct.migrator.ragtime/sql :recipes-app.migrations/create-recipe]
  {:up ["CREATE TABLE recipe (id INTEGER PRIMARY KEY, name TEXT UNIQUE, author TEXT, url TEXT, text TEXT, rating INTEGER)"]
-  :down ["DROP TABLE recipe"]}}
+  :down ["DROP TABLE recipe"]}
+  :duct.middleware.web/defaults
+  {:security {:anti-forgery false}}
+  }
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
@@ -31,4 +36,5 @@
  :duct.module.web/site
  {}
  :duct.module/sql
- {}}
+ {}
+ }
